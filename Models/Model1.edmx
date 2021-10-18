@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CicloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="articuloid" />
+          </Key>
+          <Property Name="articuloid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="imagen" Type="varbinary(max)" />
+          <Property Name="codigoArticulo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="clienteId" />
+          </Key>
+          <Property Name="clienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellido1" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellido2" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellido1" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellido2" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="puesto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="fechaIngreso" Type="date" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NumCuenta" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="sueldo" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="envio">
+          <Key>
+            <PropertyRef Name="envioid" />
+          </Key>
+          <Property Name="envioid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="facturaid" Type="int" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fechaEnvio" Type="date" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="facturaid" />
+          </Key>
+          <Property Name="facturaid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clienteId" Type="int" Nullable="false" />
+          <Property Name="articuloid" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="total" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Ciclo.dbo.facturaMantenimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="facturaMantenimientos">
+          <Key>
+            <PropertyRef Name="facturaidM" />
+            <PropertyRef Name="clienteId" />
+            <PropertyRef Name="detallesArreglo" />
+            <PropertyRef Name="total" />
+          </Key>
+          <Property Name="facturaidM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clienteId" Type="int" Nullable="false" />
+          <Property Name="detallesArreglo" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="total" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inventario">
+          <Key>
+            <PropertyRef Name="inventarioid" />
+          </Key>
+          <Property Name="inventarioid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoArticulo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cantidadStock" Type="int" Nullable="false" />
+          <Property Name="proveeid" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Ciclo.dbo.mantenimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="mantenimientos">
+          <Key>
+            <PropertyRef Name="Num_Mantenimiento" />
+            <PropertyRef Name="cedula" />
+            <PropertyRef Name="tipoMantenimiento" />
+            <PropertyRef Name="detallesArreglo" />
+          </Key>
+          <Property Name="Num_Mantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tipoMantenimiento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="detallesArreglo" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="proveeid" />
+          </Key>
+          <Property Name="proveeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedulaJuridica" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="fechaIngre" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="descripcionRol" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="pwUsuario" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="Client">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="facturaMantenimientos" Type="Self.facturaMantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="clienteId" />
+            </Principal>
+            <Dependent Role="facturaMantenimientos">
+              <PropertyRef Name="clienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_ARTICULOCODIGO' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_ARTICULOCODIGO" />-->
+        <Association Name="FK_ARTICULOID">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articuloid" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="articuloid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_CLIENTE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_CLIENTE" />-->
+        <Association Name="FK_CLIENTEID">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="clienteId" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="clienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURAID">
+          <End Role="factura" Type="Self.factura" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="envio" Type="Self.envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="factura">
+              <PropertyRef Name="facturaid" />
+            </Principal>
+            <Dependent Role="envio">
+              <PropertyRef Name="facturaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDORID">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+          <End Role="inventario" Type="Self.inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="proveeid" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="proveeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_Usuario_Rol" />-->
+        <EntityContainer Name="CicloModelStoreContainer">
+          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="envio" EntityType="Self.envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="factura" EntityType="Self.factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventario" EntityType="Self.inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [facturaMantenimientos].[facturaidM] AS [facturaidM], 
+    [facturaMantenimientos].[clienteId] AS [clienteId], 
+    [facturaMantenimientos].[detallesArreglo] AS [detallesArreglo], 
+    [facturaMantenimientos].[total] AS [total]
+    FROM [dbo].[facturaMantenimientos] AS [facturaMantenimientos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mantenimientos].[Num_Mantenimiento] AS [Num_Mantenimiento], 
+    [mantenimientos].[cedula] AS [cedula], 
+    [mantenimientos].[tipoMantenimiento] AS [tipoMantenimiento], 
+    [mantenimientos].[detallesArreglo] AS [detallesArreglo]
+    FROM [dbo].[mantenimientos] AS [mantenimientos]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Client" Association="Self.Client">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="facturaMantenimientos" EntitySet="facturaMantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTICULOID" Association="Self.FK_ARTICULOID">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTEID" Association="Self.FK_CLIENTEID">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURAID" Association="Self.FK_FACTURAID">
+            <End Role="factura" EntitySet="factura" />
+            <End Role="envio" EntitySet="envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDORID" Association="Self.FK_PROVEEDORID">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CicloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="articuloid" />
+          </Key>
+          <Property Name="articuloid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="codigoArticulo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="factura" Relationship="Self.FK_ARTICULOID" FromRole="articulo" ToRole="factura" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="clienteId" />
+          </Key>
+          <Property Name="clienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="facturaMantenimientos" Relationship="Self.Client" FromRole="cliente" ToRole="facturaMantenimientos" />
+          <NavigationProperty Name="factura" Relationship="Self.FK_CLIENTEID" FromRole="cliente" ToRole="factura" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puesto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumCuenta" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sueldo" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="envio">
+          <Key>
+            <PropertyRef Name="envioid" />
+          </Key>
+          <Property Name="envioid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="facturaid" Type="Int32" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaEnvio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="factura" Relationship="Self.FK_FACTURAID" FromRole="envio" ToRole="factura" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="facturaid" />
+          </Key>
+          <Property Name="facturaid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clienteId" Type="Int32" Nullable="false" />
+          <Property Name="articuloid" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="articulo" Relationship="Self.FK_ARTICULOID" FromRole="factura" ToRole="articulo" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK_CLIENTEID" FromRole="factura" ToRole="cliente" />
+          <NavigationProperty Name="envio" Relationship="Self.FK_FACTURAID" FromRole="factura" ToRole="envio" />
+        </EntityType>
+        <EntityType Name="inventario">
+          <Key>
+            <PropertyRef Name="inventarioid" />
+          </Key>
+          <Property Name="inventarioid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoArticulo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidadStock" Type="Int32" Nullable="false" />
+          <Property Name="proveeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="proveedor" Relationship="Self.FK_PROVEEDORID" FromRole="inventario" ToRole="proveedor" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="proveeid" />
+          </Key>
+          <Property Name="proveeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedulaJuridica" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaIngre" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="inventario" Relationship="Self.FK_PROVEEDORID" FromRole="proveedor" ToRole="inventario" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcionRol" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="facturaMantenimientos">
+          <Key>
+            <PropertyRef Name="facturaidM" />
+            <PropertyRef Name="clienteId" />
+            <PropertyRef Name="detallesArreglo" />
+            <PropertyRef Name="total" />
+          </Key>
+          <Property Name="facturaidM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clienteId" Type="Int32" Nullable="false" />
+          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.Client" FromRole="facturaMantenimientos" ToRole="cliente" />
+        </EntityType>
+        <EntityType Name="mantenimientos">
+          <Key>
+            <PropertyRef Name="Num_Mantenimiento" />
+            <PropertyRef Name="cedula" />
+            <PropertyRef Name="tipoMantenimiento" />
+            <PropertyRef Name="detallesArreglo" />
+          </Key>
+          <Property Name="Num_Mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoMantenimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ARTICULOID">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articuloid" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="articuloid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="facturaMantenimientos" Type="Self.facturaMantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="clienteId" />
+            </Principal>
+            <Dependent Role="facturaMantenimientos">
+              <PropertyRef Name="clienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTEID">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="factura" Type="Self.factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="clienteId" />
+            </Principal>
+            <Dependent Role="factura">
+              <PropertyRef Name="clienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURAID">
+          <End Role="factura" Type="Self.factura" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="envio" Type="Self.envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="factura">
+              <PropertyRef Name="facturaid" />
+            </Principal>
+            <Dependent Role="envio">
+              <PropertyRef Name="facturaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVEEDORID">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="1" />
+          <End Role="inventario" Type="Self.inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="proveeid" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="proveeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CicloEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="articulo" EntityType="Self.articulo" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" />
+          <EntitySet Name="envio" EntityType="Self.envio" />
+          <EntitySet Name="factura" EntityType="Self.factura" />
+          <EntitySet Name="inventario" EntityType="Self.inventario" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" />
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" />
+          <AssociationSet Name="FK_ARTICULOID" Association="Self.FK_ARTICULOID">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="Client" Association="Self.Client">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="facturaMantenimientos" EntitySet="facturaMantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTEID" Association="Self.FK_CLIENTEID">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="factura" EntitySet="factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURAID" Association="Self.FK_FACTURAID">
+            <End Role="factura" EntitySet="factura" />
+            <End Role="envio" EntitySet="envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVEEDORID" Association="Self.FK_PROVEEDORID">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CicloModelStoreContainer" CdmEntityContainer="CicloEntities">
+          <EntitySetMapping Name="articulo">
+            <EntityTypeMapping TypeName="CicloModel.articulo">
+              <MappingFragment StoreEntitySet="articulo">
+                <ScalarProperty Name="articuloid" ColumnName="articuloid" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="CicloModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado">
+            <EntityTypeMapping TypeName="CicloModel.empleado">
+              <MappingFragment StoreEntitySet="empleado">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="NumCuenta" ColumnName="NumCuenta" />
+                <ScalarProperty Name="sueldo" ColumnName="sueldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="envio">
+            <EntityTypeMapping TypeName="CicloModel.envio">
+              <MappingFragment StoreEntitySet="envio">
+                <ScalarProperty Name="envioid" ColumnName="envioid" />
+                <ScalarProperty Name="facturaid" ColumnName="facturaid" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="fechaEnvio" ColumnName="fechaEnvio" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura">
+            <EntityTypeMapping TypeName="CicloModel.factura">
+              <MappingFragment StoreEntitySet="factura">
+                <ScalarProperty Name="facturaid" ColumnName="facturaid" />
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="articuloid" ColumnName="articuloid" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventario">
+            <EntityTypeMapping TypeName="CicloModel.inventario">
+              <MappingFragment StoreEntitySet="inventario">
+                <ScalarProperty Name="inventarioid" ColumnName="inventarioid" />
+                <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+                <ScalarProperty Name="cantidadStock" ColumnName="cantidadStock" />
+                <ScalarProperty Name="proveeid" ColumnName="proveeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="CicloModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="proveeid" ColumnName="proveeid" />
+                <ScalarProperty Name="cedulaJuridica" ColumnName="cedulaJuridica" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="fechaIngre" ColumnName="fechaIngre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="CicloModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="CicloModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="pwUsuario" ColumnName="pwUsuario" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facturaMantenimientos">
+            <EntityTypeMapping TypeName="CicloModel.facturaMantenimientos">
+              <MappingFragment StoreEntitySet="facturaMantenimientos">
+                <ScalarProperty Name="facturaidM" ColumnName="facturaidM" />
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantenimientos">
+            <EntityTypeMapping TypeName="CicloModel.mantenimientos">
+              <MappingFragment StoreEntitySet="mantenimientos">
+                <ScalarProperty Name="Num_Mantenimiento" ColumnName="Num_Mantenimiento" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="tipoMantenimiento" ColumnName="tipoMantenimiento" />
+                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

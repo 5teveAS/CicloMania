@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicloMania", "CicloMania.csproj", "{D7DC5F22-7579-416F-9879-A9FB275E49A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7DC5F22-7579-416F-9879-A9FB275E49A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DC5F22-7579-416F-9879-A9FB275E49A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DC5F22-7579-416F-9879-A9FB275E49A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DC5F22-7579-416F-9879-A9FB275E49A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E1017D1-9873-4203-97F1-4F045250DE2C}
+	EndGlobalSection
+EndGlobal
