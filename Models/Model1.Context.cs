@@ -13,10 +13,10 @@ namespace CicloMania.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CicloEntities : DbContext
+    public partial class CicloEntities1 : DbContext
     {
-        public CicloEntities()
-            : base("name=CicloEntities")
+        public CicloEntities1()
+            : base("name=CicloEntities1")
         {
         }
     
@@ -30,11 +30,11 @@ namespace CicloMania.Models
         public virtual DbSet<empleado> empleado { get; set; }
         public virtual DbSet<envio> envio { get; set; }
         public virtual DbSet<factura> factura { get; set; }
+        public virtual DbSet<facturaMantenimientos> facturaMantenimientos { get; set; }
         public virtual DbSet<inventario> inventario { get; set; }
+        public virtual DbSet<mantenimientos> mantenimientos { get; set; }
         public virtual DbSet<proveedor> proveedor { get; set; }
         public virtual DbSet<rol> rol { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<facturaMantenimientos> facturaMantenimientos { get; set; }
-        public virtual DbSet<mantenimientos> mantenimientos { get; set; }
     }
 }

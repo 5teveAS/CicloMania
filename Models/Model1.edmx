@@ -68,14 +68,9 @@
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="total" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Ciclo.dbo.facturaMantenimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="facturaMantenimientos">
           <Key>
             <PropertyRef Name="facturaidM" />
-            <PropertyRef Name="clienteId" />
-            <PropertyRef Name="detallesArreglo" />
-            <PropertyRef Name="total" />
           </Key>
           <Property Name="facturaidM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="clienteId" Type="int" Nullable="false" />
@@ -91,14 +86,9 @@ advertencia 6002: La tabla o vista 'Ciclo.dbo.facturaMantenimientos' no tiene de
           <Property Name="cantidadStock" Type="int" Nullable="false" />
           <Property Name="proveeid" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Ciclo.dbo.mantenimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="mantenimientos">
           <Key>
             <PropertyRef Name="Num_Mantenimiento" />
-            <PropertyRef Name="cedula" />
-            <PropertyRef Name="tipoMantenimiento" />
-            <PropertyRef Name="detallesArreglo" />
           </Key>
           <Property Name="Num_Mantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cedula" Type="varchar" MaxLength="10" Nullable="false" />
@@ -214,26 +204,12 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <EntitySet Name="empleado" EntityType="Self.empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="envio" EntityType="Self.envio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="factura" EntityType="Self.factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inventario" EntityType="Self.inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [facturaMantenimientos].[facturaidM] AS [facturaidM], 
-    [facturaMantenimientos].[clienteId] AS [clienteId], 
-    [facturaMantenimientos].[detallesArreglo] AS [detallesArreglo], 
-    [facturaMantenimientos].[total] AS [total]
-    FROM [dbo].[facturaMantenimientos] AS [facturaMantenimientos]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [mantenimientos].[Num_Mantenimiento] AS [Num_Mantenimiento], 
-    [mantenimientos].[cedula] AS [cedula], 
-    [mantenimientos].[tipoMantenimiento] AS [tipoMantenimiento], 
-    [mantenimientos].[detallesArreglo] AS [detallesArreglo]
-    FROM [dbo].[mantenimientos] AS [mantenimientos]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="Client" Association="Self.Client">
             <End Role="cliente" EntitySet="cliente" />
             <End Role="facturaMantenimientos" EntitySet="facturaMantenimientos" />
@@ -330,6 +306,16 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <NavigationProperty Name="cliente" Relationship="Self.FK_CLIENTEID" FromRole="factura" ToRole="cliente" />
           <NavigationProperty Name="envio" Relationship="Self.FK_FACTURAID" FromRole="factura" ToRole="envio" />
         </EntityType>
+        <EntityType Name="facturaMantenimientos">
+          <Key>
+            <PropertyRef Name="facturaidM" />
+          </Key>
+          <Property Name="facturaidM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clienteId" Type="Int32" Nullable="false" />
+          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.Client" FromRole="facturaMantenimientos" ToRole="cliente" />
+        </EntityType>
         <EntityType Name="inventario">
           <Key>
             <PropertyRef Name="inventarioid" />
@@ -339,6 +325,15 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <Property Name="cantidadStock" Type="Int32" Nullable="false" />
           <Property Name="proveeid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="proveedor" Relationship="Self.FK_PROVEEDORID" FromRole="inventario" ToRole="proveedor" />
+        </EntityType>
+        <EntityType Name="mantenimientos">
+          <Key>
+            <PropertyRef Name="Num_Mantenimiento" />
+          </Key>
+          <Property Name="Num_Mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoMantenimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="proveedor">
           <Key>
@@ -370,31 +365,6 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <Property Name="pwUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombreUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nombre_Rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="facturaMantenimientos">
-          <Key>
-            <PropertyRef Name="facturaidM" />
-            <PropertyRef Name="clienteId" />
-            <PropertyRef Name="detallesArreglo" />
-            <PropertyRef Name="total" />
-          </Key>
-          <Property Name="facturaidM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="clienteId" Type="Int32" Nullable="false" />
-          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="total" Type="Double" Nullable="false" />
-          <NavigationProperty Name="cliente" Relationship="Self.Client" FromRole="facturaMantenimientos" ToRole="cliente" />
-        </EntityType>
-        <EntityType Name="mantenimientos">
-          <Key>
-            <PropertyRef Name="Num_Mantenimiento" />
-            <PropertyRef Name="cedula" />
-            <PropertyRef Name="tipoMantenimiento" />
-            <PropertyRef Name="detallesArreglo" />
-          </Key>
-          <Property Name="Num_Mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipoMantenimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="detallesArreglo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="FK_ARTICULOID">
           <End Role="articulo" Type="Self.articulo" Multiplicity="1">
@@ -460,18 +430,18 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CicloEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CicloEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="articulo" EntityType="Self.articulo" />
           <EntitySet Name="cliente" EntityType="Self.cliente" />
           <EntitySet Name="empleado" EntityType="Self.empleado" />
           <EntitySet Name="envio" EntityType="Self.envio" />
           <EntitySet Name="factura" EntityType="Self.factura" />
+          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" />
           <EntitySet Name="inventario" EntityType="Self.inventario" />
+          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" />
           <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
-          <EntitySet Name="facturaMantenimientos" EntityType="Self.facturaMantenimientos" />
-          <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" />
           <AssociationSet Name="FK_ARTICULOID" Association="Self.FK_ARTICULOID">
             <End Role="articulo" EntitySet="articulo" />
             <End Role="factura" EntitySet="factura" />
@@ -498,7 +468,7 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CicloModelStoreContainer" CdmEntityContainer="CicloEntities">
+        <EntityContainerMapping StorageEntityContainer="CicloModelStoreContainer" CdmEntityContainer="CicloEntities1">
           <EntitySetMapping Name="articulo">
             <EntityTypeMapping TypeName="CicloModel.articulo">
               <MappingFragment StoreEntitySet="articulo">
@@ -567,6 +537,16 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="facturaMantenimientos">
+            <EntityTypeMapping TypeName="CicloModel.facturaMantenimientos">
+              <MappingFragment StoreEntitySet="facturaMantenimientos">
+                <ScalarProperty Name="facturaidM" ColumnName="facturaidM" />
+                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="inventario">
             <EntityTypeMapping TypeName="CicloModel.inventario">
               <MappingFragment StoreEntitySet="inventario">
@@ -574,6 +554,16 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
                 <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
                 <ScalarProperty Name="cantidadStock" ColumnName="cantidadStock" />
                 <ScalarProperty Name="proveeid" ColumnName="proveeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantenimientos">
+            <EntityTypeMapping TypeName="CicloModel.mantenimientos">
+              <MappingFragment StoreEntitySet="mantenimientos">
+                <ScalarProperty Name="Num_Mantenimiento" ColumnName="Num_Mantenimiento" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="tipoMantenimiento" ColumnName="tipoMantenimiento" />
+                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -607,26 +597,6 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
                 <ScalarProperty Name="pwUsuario" ColumnName="pwUsuario" />
                 <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
                 <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="facturaMantenimientos">
-            <EntityTypeMapping TypeName="CicloModel.facturaMantenimientos">
-              <MappingFragment StoreEntitySet="facturaMantenimientos">
-                <ScalarProperty Name="facturaidM" ColumnName="facturaidM" />
-                <ScalarProperty Name="clienteId" ColumnName="clienteId" />
-                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
-                <ScalarProperty Name="total" ColumnName="total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mantenimientos">
-            <EntityTypeMapping TypeName="CicloModel.mantenimientos">
-              <MappingFragment StoreEntitySet="mantenimientos">
-                <ScalarProperty Name="Num_Mantenimiento" ColumnName="Num_Mantenimiento" />
-                <ScalarProperty Name="cedula" ColumnName="cedula" />
-                <ScalarProperty Name="tipoMantenimiento" ColumnName="tipoMantenimiento" />
-                <ScalarProperty Name="detallesArreglo" ColumnName="detallesArreglo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

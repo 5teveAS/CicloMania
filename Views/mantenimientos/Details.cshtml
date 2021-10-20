@@ -11,9 +11,33 @@
     <h4>mantenimientos</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoMantenimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoMantenimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detallesArreglo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detallesArreglo)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Num_Mantenimiento }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

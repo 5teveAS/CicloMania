@@ -12,7 +12,7 @@ namespace CicloMania.Controllers
 {
     public class inventarioController : Controller
     {
-        private CicloEntities db = new CicloEntities();
+        private CicloEntities1 db = new CicloEntities1();
 
         // GET: inventario
         public ActionResult Index()

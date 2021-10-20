@@ -12,6 +12,22 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.detallesArreglo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detallesArreglo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.cliente.cedula)
         </dt>
 
@@ -22,6 +38,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.facturaidM }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

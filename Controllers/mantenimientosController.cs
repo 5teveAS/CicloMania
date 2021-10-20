@@ -12,7 +12,7 @@ namespace CicloMania.Controllers
 {
     public class mantenimientosController : Controller
     {
-        private CicloEntities db = new CicloEntities();
+        private CicloEntities1 db = new CicloEntities1();
 
         // GET: mantenimientos
         public ActionResult Index()

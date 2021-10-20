@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a57209a08126423786df02d12d4193bc" Name="Diagram1">
+      <Diagram DiagramId="649ccaf8a40f4e4d8c8a14bc332b1fe9" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="CicloModel.articulo" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CicloModel.cliente" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CicloModel.empleado" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CicloModel.envio" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CicloModel.factura" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CicloModel.inventario" Width="1.5" PointX="8" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CicloModel.proveedor" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CicloModel.rol" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CicloModel.usuario" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CicloModel.facturaMantenimientos" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CicloModel.mantenimientos" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CicloModel.inventario" Width="1.5" PointX="8" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CicloModel.mantenimientos" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CicloModel.proveedor" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CicloModel.rol" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CicloModel.usuario" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="CicloModel.FK_ARTICULOID" ManuallyRouted="false" />
         <AssociationConnector Association="CicloModel.Client" ManuallyRouted="false" />
         <AssociationConnector Association="CicloModel.FK_CLIENTEID" ManuallyRouted="false" />

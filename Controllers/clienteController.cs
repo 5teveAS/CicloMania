@@ -10,17 +10,17 @@ using CicloMania.Models;
 
 namespace CicloMania.Controllers
 {
-    public class clientesController : Controller
+    public class clienteController : Controller
     {
-        private CicloEntities db = new CicloEntities();
+        private CicloEntities1 db = new CicloEntities1();
 
-        // GET: clientes
+        // GET: cliente
         public ActionResult Index()
         {
             return View(db.cliente.ToList());
         }
 
-        // GET: clientes/Details/5
+        // GET: cliente/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace CicloMania.Controllers
             return View(cliente);
         }
 
-        // GET: clientes/Create
+        // GET: cliente/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: clientes/Create
+        // POST: cliente/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +58,7 @@ namespace CicloMania.Controllers
             return View(cliente);
         }
 
-        // GET: clientes/Edit/5
+        // GET: cliente/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,7 +73,7 @@ namespace CicloMania.Controllers
             return View(cliente);
         }
 
-        // POST: clientes/Edit/5
+        // POST: cliente/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace CicloMania.Controllers
             return View(cliente);
         }
 
-        // GET: clientes/Delete/5
+        // GET: cliente/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace CicloMania.Controllers
             return View(cliente);
         }
 
-        // POST: clientes/Delete/5
+        // POST: cliente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
