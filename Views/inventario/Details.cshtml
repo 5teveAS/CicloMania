@@ -1,0 +1,43 @@
+﻿@model CicloMania.Models.inventario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>inventario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.codigoArticulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codigoArticulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidadStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidadStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proveedor.cedulaJuridica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedor.cedulaJuridica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.inventarioid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

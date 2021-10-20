@@ -127,9 +127,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\articuloController.cs" />
     <Compile Include="Controllers\clientesController.cs" />
     <Compile Include="Controllers\empleadoController.cs" />
+    <Compile Include="Controllers\enviosController.cs" />
+    <Compile Include="Controllers\facturaController.cs" />
+    <Compile Include="Controllers\facturaMantenimientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\inventarioController.cs" />
+    <Compile Include="Controllers\mantenimientosController.cs" />
+    <Compile Include="Controllers\proveedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -356,6 +363,41 @@
     <Content Include="Views\empleado\Details.cshtml" />
     <Content Include="Views\empleado\Edit.cshtml" />
     <Content Include="Views\empleado\Index.cshtml" />
+    <Content Include="Views\articulo\Create.cshtml" />
+    <Content Include="Views\articulo\Delete.cshtml" />
+    <Content Include="Views\articulo\Details.cshtml" />
+    <Content Include="Views\articulo\Edit.cshtml" />
+    <Content Include="Views\articulo\Index.cshtml" />
+    <Content Include="Views\inventario\Create.cshtml" />
+    <Content Include="Views\inventario\Delete.cshtml" />
+    <Content Include="Views\inventario\Details.cshtml" />
+    <Content Include="Views\inventario\Edit.cshtml" />
+    <Content Include="Views\inventario\Index.cshtml" />
+    <Content Include="Views\proveedor\Create.cshtml" />
+    <Content Include="Views\proveedor\Delete.cshtml" />
+    <Content Include="Views\proveedor\Details.cshtml" />
+    <Content Include="Views\proveedor\Edit.cshtml" />
+    <Content Include="Views\proveedor\Index.cshtml" />
+    <Content Include="Views\envios\Create.cshtml" />
+    <Content Include="Views\envios\Delete.cshtml" />
+    <Content Include="Views\envios\Details.cshtml" />
+    <Content Include="Views\envios\Edit.cshtml" />
+    <Content Include="Views\envios\Index.cshtml" />
+    <Content Include="Views\factura\Create.cshtml" />
+    <Content Include="Views\factura\Delete.cshtml" />
+    <Content Include="Views\factura\Details.cshtml" />
+    <Content Include="Views\factura\Edit.cshtml" />
+    <Content Include="Views\factura\Index.cshtml" />
+    <Content Include="Views\facturaMantenimiento\Create.cshtml" />
+    <Content Include="Views\facturaMantenimiento\Delete.cshtml" />
+    <Content Include="Views\facturaMantenimiento\Details.cshtml" />
+    <Content Include="Views\facturaMantenimiento\Edit.cshtml" />
+    <Content Include="Views\facturaMantenimiento\Index.cshtml" />
+    <Content Include="Views\mantenimientos\Create.cshtml" />
+    <Content Include="Views\mantenimientos\Delete.cshtml" />
+    <Content Include="Views\mantenimientos\Details.cshtml" />
+    <Content Include="Views\mantenimientos\Edit.cshtml" />
+    <Content Include="Views\mantenimientos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

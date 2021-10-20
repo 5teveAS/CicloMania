@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CicloMania.Models.inventario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codigoArticulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proveedor.cedulaJuridica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codigoArticulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidadStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proveedor.cedulaJuridica)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.inventarioid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.inventarioid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.inventarioid })
+        </td>
+    </tr>
+}
+
+</table>
