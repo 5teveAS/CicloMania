@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Factura por mantenimiento", "Create")
 </p>
 <table class="table">
     <tr>
@@ -36,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.cliente.cedula)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.facturaidM }) |
-            @Html.ActionLink("Details", "Details", new { id=item.facturaidM }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.facturaidM })
+            @Html.ActionLink("Editar", "Edit", new { id=item.facturaidM }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.facturaidM }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.facturaidM })
         </td>
     </tr>
 }
