@@ -45,8 +45,9 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.imagen)
+            <img width="50" height="50" src="@Url.Action("getImage", "articulo" , new { id = item.articuloid })" /> 
         </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.codigoArticulo)
         </td>
