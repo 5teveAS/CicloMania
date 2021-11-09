@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CicloMania.Clases;
 using CicloMania.Models;
 
 namespace CicloMania.Controllers
@@ -14,9 +15,12 @@ namespace CicloMania.Controllers
     {
         private CicloEntities1 db = new CicloEntities1();
 
+        PersonaEMP persona = new PersonaEMP();
         // GET: empleado
         public ActionResult Index()
         {
+           //IEnumerable<empleado> lst = persona.Consultar();
+
             return View(db.empleado.ToList());
         }
 
@@ -38,6 +42,7 @@ namespace CicloMania.Controllers
         // GET: empleado/Create
         public ActionResult Create()
         {
+            ViewBag.Mensaje = "";
             return View();
         }
 
@@ -48,10 +53,12 @@ namespace CicloMania.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idEmpleado,cedula,nombre,apellido1,apellido2,puesto,fechaIngreso,telefono,genero,correo,NumCuenta,sueldo")] empleado empleado)
         {
+            
             if (ModelState.IsValid)
             {
                 db.empleado.Add(empleado);
                 db.SaveChanges();
+                ViewBag.Mensaje = "El registro se guardo correctamente";
                 return RedirectToAction("Index");
             }
 
@@ -61,6 +68,7 @@ namespace CicloMania.Controllers
         // GET: empleado/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Mensaje = "";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +92,7 @@ namespace CicloMania.Controllers
             {
                 db.Entry(empleado).State = EntityState.Modified;
                 db.SaveChanges();
+                ViewBag.Mensaje = "El registro se guardo correctamente";
                 return RedirectToAction("Index");
             }
             return View(empleado);
@@ -92,6 +101,7 @@ namespace CicloMania.Controllers
         // GET: empleado/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.Mensaje = "";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -112,7 +122,9 @@ namespace CicloMania.Controllers
             empleado empleado = db.empleado.Find(id);
             db.empleado.Remove(empleado);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            ViewBag.Mensaje = "El registro se elimino correctamente";
+           return RedirectToAction("Index");
+            //return View(empleado);
         }
 
         protected override void Dispose(bool disposing)
