@@ -11,46 +11,20 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class empleado
     {
-        [Required(ErrorMessage = "El ID del Empleado es OBLIGATORIO")]
         public int idEmpleado { get; set; }
-        [Required(ErrorMessage = "La cedula es OBLIGATORIA")]
-        [StringLength(10)]
         public string cedula { get; set; }
-        [Required(ErrorMessage = "El nombre del empleado es OBLIGATORIO")]
-        [StringLength(20)]
         public string nombre { get; set; }
-        [Required(ErrorMessage = "Los apellidos son OBLIGATORIOS")]
-        [StringLength(20)]
         public string apellido1 { get; set; }
-        [Required(ErrorMessage = "Los apellidos son OBLIGATORIOS")]
-        [StringLength(20)]
         public string apellido2 { get; set; }
-        [Required(ErrorMessage = "El puesto del Empleado es OBLIGATORIO")]
-        [StringLength(30)]
         public string puesto { get; set; }
-        [Required(ErrorMessage = "La fecha de ingreso es OBLIGATORIA")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime fechaIngreso { get; set; }
-        [Required(ErrorMessage = "El telefono del Empleado es OBLIGATORIO")]
-        [StringLength(20)]
-        [Phone]
         public string telefono { get; set; }
-        [Required(ErrorMessage = "El genero del Empleado es OBLIGATORIO")]
-        [StringLength(1)]
         public string genero { get; set; }
-        [Required(ErrorMessage = "El correo del Empleado es OBLIGATORIO")]
-        [StringLength(20)]
-        [EmailAddress]
         public string correo { get; set; }
-        [Required(ErrorMessage = "El Numero de cuenta del Empleado es OBLIGATORIO")]
-        [StringLength(40)]
         public string NumCuenta { get; set; }
-        [Required(ErrorMessage = "El sueldo del Empleado es OBLIGATORIO")]
         public decimal sueldo { get; set; }
     }
 }

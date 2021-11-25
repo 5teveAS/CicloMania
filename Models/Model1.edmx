@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CicloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CicloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="articulo">
           <Key>
             <PropertyRef Name="articuloid" />
@@ -107,23 +107,28 @@
           <Property Name="correo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="fechaIngre" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="rol">
+        <EntityType Name="Roles">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Rol" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="descripcionRol" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="usuario">
+        <EntityType Name="UserRolesMapping">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userid" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="pwUsuario" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="nombreUsuario" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Nombre_Rol" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre de usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name=" Contraseña " Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="Client">
           <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
@@ -134,6 +139,42 @@
             </Principal>
             <Dependent Role="facturaMantenimientos">
               <PropertyRef Name="clienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__7D439ABD">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__7E37BEF6">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__UserI__7F2BE32F">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -195,9 +236,6 @@ advertencia 6035: La relación 'FK_CLIENTE' tiene columnas que no forman parte d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK_Usuario_Rol" />-->
         <EntityContainer Name="CicloModelStoreContainer">
           <EntitySet Name="articulo" EntityType="Self.articulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
@@ -208,11 +246,24 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <EntitySet Name="inventario" EntityType="Self.inventario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRolesMapping" EntityType="Self.UserRolesMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Client" Association="Self.Client">
             <End Role="cliente" EntitySet="cliente" />
             <End Role="facturaMantenimientos" EntitySet="facturaMantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__7D439ABD" Association="Self.FK__UserRoles__RoleI__7D439ABD">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__7E37BEF6" Association="Self.FK__UserRoles__RoleI__7E37BEF6">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__UserI__7F2BE32F" Association="Self.FK__UserRoles__UserI__7F2BE32F">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>
           <AssociationSet Name="FK_ARTICULOID" Association="Self.FK_ARTICULOID">
             <End Role="articulo" EntitySet="articulo" />
@@ -231,8 +282,7 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
             <End Role="inventario" EntitySet="inventario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CicloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -348,24 +398,6 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <Property Name="fechaIngre" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="inventario" Relationship="Self.FK_PROVEEDORID" FromRole="proveedor" ToRole="inventario" />
         </EntityType>
-        <EntityType Name="rol">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcionRol" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userid" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pwUsuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombreUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nombre_Rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <Association Name="FK_ARTICULOID">
           <End Role="articulo" Type="Self.articulo" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -440,8 +472,6 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
           <EntitySet Name="inventario" EntityType="Self.inventario" />
           <EntitySet Name="mantenimientos" EntityType="Self.mantenimientos" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" />
-          <EntitySet Name="rol" EntityType="Self.rol" />
-          <EntitySet Name="usuario" EntityType="Self.usuario" />
           <AssociationSet Name="FK_ARTICULOID" Association="Self.FK_ARTICULOID">
             <End Role="articulo" EntitySet="articulo" />
             <End Role="factura" EntitySet="factura" />
@@ -462,7 +492,87 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
             <End Role="proveedor" EntitySet="proveedor" />
             <End Role="inventario" EntitySet="inventario" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="CicloModel.Roles" />
+          <EntitySet Name="UserRolesMapping" EntityType="CicloModel.UserRolesMapping" />
+          <EntitySet Name="Usuarios" EntityType="CicloModel.Usuarios" />
+          <AssociationSet Name="FK__UserRoles__RoleI__7D439ABD" Association="CicloModel.FK__UserRoles__RoleI__7D439ABD">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__7E37BEF6" Association="CicloModel.FK__UserRoles__RoleI__7E37BEF6">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__UserI__7F2BE32F" Association="CicloModel.FK__UserRoles__UserI__7F2BE32F">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRolesMapping" Relationship="CicloModel.FK__UserRoles__RoleI__7D439ABD" FromRole="Roles" ToRole="UserRolesMapping" />
+          <NavigationProperty Name="UserRolesMapping1" Relationship="CicloModel.FK__UserRoles__RoleI__7E37BEF6" FromRole="Roles" ToRole="UserRolesMapping" />
+        </EntityType>
+        <EntityType Name="UserRolesMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="CicloModel.FK__UserRoles__RoleI__7D439ABD" FromRole="UserRolesMapping" ToRole="Roles" />
+          <NavigationProperty Name="Roles1" Relationship="CicloModel.FK__UserRoles__RoleI__7E37BEF6" FromRole="UserRolesMapping" ToRole="Roles" />
+          <NavigationProperty Name="Usuarios" Relationship="CicloModel.FK__UserRoles__UserI__7F2BE32F" FromRole="UserRolesMapping" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_de_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Contraseña_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRolesMapping" Relationship="CicloModel.FK__UserRoles__UserI__7F2BE32F" FromRole="Usuarios" ToRole="UserRolesMapping" />
+        </EntityType>
+        <Association Name="FK__UserRoles__RoleI__7D439ABD">
+          <End Type="CicloModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="CicloModel.UserRolesMapping" Role="UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__7E37BEF6">
+          <End Type="CicloModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="CicloModel.UserRolesMapping" Role="UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__UserI__7F2BE32F">
+          <End Type="CicloModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+          <End Type="CicloModel.UserRolesMapping" Role="UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -580,27 +690,33 @@ advertencia 6035: La relación 'FK_Usuario_Rol' tiene columnas que no forman par
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="rol">
-            <EntityTypeMapping TypeName="CicloModel.rol">
-              <MappingFragment StoreEntitySet="rol">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
-                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="CicloModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuario">
-            <EntityTypeMapping TypeName="CicloModel.usuario">
-              <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="pwUsuario" ColumnName="pwUsuario" />
-                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
-                <ScalarProperty Name="Nombre_Rol" ColumnName="Nombre_Rol" />
+          <EntitySetMapping Name="UserRolesMapping">
+            <EntityTypeMapping TypeName="CicloModel.UserRolesMapping">
+              <MappingFragment StoreEntitySet="UserRolesMapping">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="CicloModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="C_Contraseña_" ColumnName=" Contraseña " />
+                <ScalarProperty Name="Nombre_de_usuario" ColumnName="Nombre de usuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -1,0 +1,32 @@
+﻿@model CicloMania.Models.Usuarios
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card custom-card">
+        <div class="card-header bg-primary text-white">
+            <h3>Login Form</h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nombre_de_usuario)
+                @Html.TextBoxFor(m => m.Nombre_de_usuario, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nombre_de_usuario)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.C_Contraseña_)
+                @Html.PasswordFor(m => m.C_Contraseña_, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.C_Contraseña_)
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary rounded-0">Login</button>
+                @Html.ActionLink("New User", "Register")
+            </div>
+
+        </div>
+    </div>
+}
+

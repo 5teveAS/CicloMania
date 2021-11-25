@@ -34,7 +34,8 @@ namespace CicloMania.Models
         public virtual DbSet<inventario> inventario { get; set; }
         public virtual DbSet<mantenimientos> mantenimientos { get; set; }
         public virtual DbSet<proveedor> proveedor { get; set; }
-        public virtual DbSet<rol> rol { get; set; }
-        public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<UserRolesMapping> UserRolesMapping { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

@@ -12,12 +12,14 @@ namespace CicloMania.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuario
+    public partial class UserRolesMapping
     {
-        public int id { get; set; }
-        public string userid { get; set; }
-        public string pwUsuario { get; set; }
-        public string nombreUsuario { get; set; }
-        public string Nombre_Rol { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> RoleId { get; set; }
+    
+        public virtual Roles Roles { get; set; }
+        public virtual Roles Roles1 { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }
