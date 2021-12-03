@@ -17,12 +17,14 @@
                 @Html.TextBoxFor(m => m.Nombre_de_usuario, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Nombre_de_usuario)
             </div>
+            <br />
             <div class="form-group">
                 @Html.LabelFor(m => m.C_Contraseña_)
                 @Html.PasswordFor(m => m.C_Contraseña_, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.C_Contraseña_)
             </div>
             <div class="form-group">
+                <br />
                 <button type="submit" class="btn btn-success rounded-0">Registrase</button>
                 @Html.ActionLink("Volver al Login", "Login")
             </div>

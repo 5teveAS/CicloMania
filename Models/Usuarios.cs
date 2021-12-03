@@ -11,7 +11,8 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,11 @@ namespace CicloMania.Models
         }
     
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "Usuario")]
         public string Nombre_de_usuario { get; set; }
+        [Required]
+        [Display(Name = "Contraseña")]
         public string C_Contraseña_ { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
