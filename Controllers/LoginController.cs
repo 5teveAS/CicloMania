@@ -24,8 +24,8 @@ namespace CicloMania.Controllers
             {
                 bool IsValidUser = db.Usuarios
                .Any(u => u.Nombre_de_usuario.ToLower() == user
-               .Nombre_de_usuario.ToLower() && user
-               .C_Contraseña_ == user.C_Contraseña_);
+               .Nombre_de_usuario.ToLower() && db.Usuarios
+               .Any(j => j.C_Contraseña_.ToLower() == user.C_Contraseña_.ToLower()));
 
                 if (IsValidUser)
                 {
@@ -34,7 +34,8 @@ namespace CicloMania.Controllers
                 }
 
             }
-            ModelState.AddModelError("", "invalid Username or Password");
+            
+           ModelState.AddModelError("", "invalid Username or Password");
             return View();
         }
 
