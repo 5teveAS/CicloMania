@@ -8,5 +8,6 @@ namespace CicloMania.Clases
 {
     public class PersonaEMP
     {
+        
     }
 }
