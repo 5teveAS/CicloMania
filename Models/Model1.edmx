@@ -142,7 +142,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__RoleI__7D439ABD">
+        <Association Name="FK__UserRoles__RoleI__4D94879B">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +154,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__RoleI__7E37BEF6">
+        <Association Name="FK__UserRoles__RoleI__4E88ABD4">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +166,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__7F2BE32F">
+        <Association Name="FK__UserRoles__UserI__4F7CD00D">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,15 +253,15 @@ advertencia 6035: La relación 'FK_CLIENTE' tiene columnas que no forman parte d
             <End Role="cliente" EntitySet="cliente" />
             <End Role="facturaMantenimientos" EntitySet="facturaMantenimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__7D439ABD" Association="Self.FK__UserRoles__RoleI__7D439ABD">
+          <AssociationSet Name="FK__UserRoles__RoleI__4D94879B" Association="Self.FK__UserRoles__RoleI__4D94879B">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__7E37BEF6" Association="Self.FK__UserRoles__RoleI__7E37BEF6">
+          <AssociationSet Name="FK__UserRoles__RoleI__4E88ABD4" Association="Self.FK__UserRoles__RoleI__4E88ABD4">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__7F2BE32F" Association="Self.FK__UserRoles__UserI__7F2BE32F">
+          <AssociationSet Name="FK__UserRoles__UserI__4F7CD00D" Association="Self.FK__UserRoles__UserI__4F7CD00D">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>

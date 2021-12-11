@@ -50,6 +50,24 @@
     margin: 0 auto;
 }
 
+.contenedorLogin {
+
+    width: 95%;
+    height:80%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.login{
+    display:grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content:center;
+    align-items:center;
+    
+
+
+}
+
 .contenedor-slide {
     width: 95%;
     max-width: 1800px;
@@ -80,6 +98,18 @@ a {
     font-size: 30px;
     text-decoration: none !important;
 }
+#logo-texto-sesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    text-align:center;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none !important;
+    padding:20px;
+}
 
 .carousel {
     height: 35% !important;
@@ -107,3 +137,4 @@ a {
 .carousel {
     margin-top: 50px;
 }
+

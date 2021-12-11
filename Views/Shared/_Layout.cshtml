@@ -33,7 +33,11 @@
                     </div>
 
                 </a>
+                <div>
+                   
+                </div>
                 <div class="dropdown">
+
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white !important">
                         MENU
                     </a>
@@ -49,6 +53,38 @@
                         <h6 class="dropdown-item" href="#">@Html.ActionLink("CRUD-Inventario", "index", "inventario")</h6>
                         <h6 class="dropdown-item" href="#">@Html.ActionLink("CRUD-Mantenimiento", "index", "mantenimientos")</h6>
                         <h6 class="dropdown-item" href="#">@Html.ActionLink("CRUD-Proveedor", "index", "proveedor")</h6>
+                    </div>
+                    <style>
+                        .verde {
+                            color: green;
+                        }
+
+                        .rojo {
+                            color: red;
+                        }
+                        a {
+                            color: white !important;
+                        }
+                        .colorBlanco{
+                            text-decoration: none;
+                            color: white !important;
+                        }
+                        ul li {
+                            color: white;
+                        }
+                    </style>
+                    <div class="btn btn-success" style="color: white !important">
+                        <ul class="nav navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Cerrar Sesión", "LogOut", "Login")</li>
+
+                            }
+                            else
+                            {
+                               <li> @Html.ActionLink("Iniciar Sesión", "Login", "Login")</li>
+                            }
+                        </ul>
                     </div>
                 </div>
 
