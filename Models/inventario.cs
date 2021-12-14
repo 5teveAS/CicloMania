@@ -11,12 +11,23 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class inventario
     {
+        [Display(Name = "ID inventario")]
+        [Required(ErrorMessage = "El ID inventario es un campo obligatorio")]
         public int inventarioid { get; set; }
+        [Display(Name = "Código del articulo")]
+        [Required(ErrorMessage = "La codigo del articulo es un campo obligatorio")]
         public string codigoArticulo { get; set; }
+        [Display(Name = "Cantidad en stock")]
+        [Required(ErrorMessage = "Cantidad en stock es un campo obligatorio")]
+        [Range(1, 9999, ErrorMessage = "Cantidad en stock no debe sobrepasar 5 dígitos")]
         public int cantidadStock { get; set; }
+        [Display(Name = "ID proveedor")]
+        [Required(ErrorMessage = "ID proveedor es un campo obligatorio")]
+        [Range(1, 9999, ErrorMessage = "ID proveedor no debe sobrepasar 5 dígitos")]
         public int proveeid { get; set; }
     
         public virtual proveedor proveedor { get; set; }

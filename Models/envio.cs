@@ -11,13 +11,27 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class envio
     {
+        [Display(Name = "Identificación")]
+        [Required(ErrorMessage = "La identificación es un campo obligatorio")]
         public int envioid { get; set; }
+        [Display(Name = "ID Factura")]
+        [Required(ErrorMessage = "El ID de la factura es un campo obligatorio")]
         public int facturaid { get; set; }
+        [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "La dirección es un campo obligatorio")]
         public string direccion { get; set; }
+        [Display(Name = "Fecha Ingreso")]
+        [Required(ErrorMessage = "La fecha ingreso es un campo obligatorio")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fechaEnvio { get; set; }
+        [Display(Name = "Estado")]
+        [Required(ErrorMessage = "El Estado es un campo obligatorio")]
+        [StringLength(20, ErrorMessage = "Tamaño máximo de 20 caracteres")]
         public string estado { get; set; }
     
         public virtual factura factura { get; set; }

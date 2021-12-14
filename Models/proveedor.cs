@@ -11,7 +11,8 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class proveedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +20,30 @@ namespace CicloMania.Models
         {
             this.inventario = new HashSet<inventario>();
         }
-    
+
+        [Display(Name = "ID Proveedor")]
+        [Required(ErrorMessage = "ID Proveedor es un campo obligatorio")]
         public int proveeid { get; set; }
+        [Display(Name = "Cédula Juridica")]
+        [Required(ErrorMessage = "La Cédula juridica es un campo obligatorio")]
         public string cedulaJuridica { get; set; }
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El nombre es un campo obligatorio")]
+        [StringLength(20, ErrorMessage = "Tamaño máximo de 20 caracteres")]
         public string nombre { get; set; }
+        [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "La dirección es un campo obligatorio")]
         public string direccion { get; set; }
+        [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "El teléfono es un campo obligatorio")]
         public int telefono { get; set; }
+        [Display(Name = "Correo")]
+        [Required(ErrorMessage = "El Correo es un campo obligatorio")]
+        [EmailAddress]
         public string correo { get; set; }
+        [Display(Name = "Fecha Ingreso")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fechaIngre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

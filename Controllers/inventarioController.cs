@@ -37,6 +37,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: inventario/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.proveeid = new SelectList(db.proveedor, "proveeid", "cedulaJuridica");
@@ -62,6 +63,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: inventario/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: inventario/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

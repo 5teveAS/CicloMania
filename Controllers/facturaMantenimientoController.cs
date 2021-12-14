@@ -37,6 +37,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: facturaMantenimiento/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.clienteId = new SelectList(db.cliente, "clienteId", "cedula");
@@ -62,6 +63,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: facturaMantenimiento/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: facturaMantenimiento/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

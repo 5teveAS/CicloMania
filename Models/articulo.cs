@@ -11,7 +11,8 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class articulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +20,31 @@ namespace CicloMania.Models
         {
             this.factura = new HashSet<factura>();
         }
-    
+
+        [Display(Name = "ID del articulo")]
+        [Required(ErrorMessage = "El ID es un campo obligatorio")]
+        //[Range(1, 999, ErrorMessage = "El ID no debe sobrepasar 4 dígitos")]
         public int articuloid { get; set; }
+        [Display(Name = "Marca")]
+        [Required(ErrorMessage = "La marca es un campo obligatorio")]
+        //[StringLength(30, ErrorMessage = "Tamaño máximo de 30 caracteres")]
         public string marca { get; set; }
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El nombre es un campo obligatorio")]
+        //[StringLength(30, ErrorMessage = "Tamaño máximo de 30 caracteres")]
         public string nombre { get; set; }
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "La descripción es un campo obligatorio")]
+        //[StringLength(30, ErrorMessage = "Tamaño máximo de 30 caracteres")]
         public string descripcion { get; set; }
+        [Display(Name = "Imagen")]
         public byte[] imagen { get; set; }
+        [Display(Name = "Código del articulo")]
+        [Required(ErrorMessage = "La codigo del articulo es un campo obligatorio")]
+        //[StringLength(30, ErrorMessage = "Tamaño máximo de 30 caracteres")]
         public string codigoArticulo { get; set; }
+        [Display(Name = "Precio")]
+        //[Required(ErrorMessage = "El precio es un campo obligatorio")]
         public double precio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

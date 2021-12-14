@@ -11,12 +11,24 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class mantenimientos
     {
+        [Display(Name = "Numero de mantenimiento")]
+        [Required(ErrorMessage = "Numero de mantenimiento es un campo obligatorio")]
+        [Range(1, 9999, ErrorMessage = "Numero de mantenimiento no debe sobrepasar 5 dígitos")]
         public int Num_Mantenimiento { get; set; }
+        [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "La cédula es un campo obligatorio")]
         public string cedula { get; set; }
+        [Display(Name = "Tipo de mantenimiento")]
+        [Required(ErrorMessage = "El Tipo de mantenimiento es un campo obligatorio")]
+        [StringLength(20, ErrorMessage = "Tamaño máximo de 20 caracteres")]
         public string tipoMantenimiento { get; set; }
+        [Display(Name = "Detalles del Arreglo")]
+        [Required(ErrorMessage = "Detalles del arreglo es un campo obligatorio")]
+        [StringLength(20, ErrorMessage = "Tamaño máximo de 20 caracteres")]
         public string detallesArreglo { get; set; }
     }
 }

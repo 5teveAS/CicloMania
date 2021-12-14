@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fechaEnvio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaEnvio, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.EditorFor(model => model.fechaEnvio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.fechaEnvio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-success" />
             </div>
         </div>
     </div>

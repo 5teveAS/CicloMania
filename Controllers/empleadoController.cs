@@ -40,6 +40,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: empleado/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.Mensaje = "";
@@ -66,6 +67,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: empleado/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             ViewBag.Mensaje = "";
@@ -99,6 +101,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: empleado/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             ViewBag.Mensaje = "";

@@ -37,6 +37,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: envios/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.facturaid = new SelectList(db.factura, "facturaid", "facturaid");
@@ -62,6 +63,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: envios/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace CicloMania.Controllers
         }
 
         // GET: envios/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

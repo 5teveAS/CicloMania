@@ -11,7 +11,8 @@ namespace CicloMania.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class factura
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +20,21 @@ namespace CicloMania.Models
         {
             this.envio = new HashSet<envio>();
         }
-    
+        [Display(Name = "ID Factura")]
+        [Required(ErrorMessage = "El ID de la factura es un campo obligatorio")]
         public int facturaid { get; set; }
+        [Display(Name = "Cliente ID")]
+        [Required(ErrorMessage = "El Cliente ID es un campo obligatorio")]
         public int clienteId { get; set; }
+        [Display(Name = "ID del articulo")]
+        [Required(ErrorMessage = "El ID es un campo obligatorio")]
         public int articuloid { get; set; }
+        [Display(Name = "Cantidad")]
+        [Required(ErrorMessage = "La cantidad es un campo obligatorio")]
+        [Range(1, 999, ErrorMessage = "La cantidad no debe sobrepasar 4 dígitos")]
         public int cantidad { get; set; }
+        [Display(Name = "Total")]
+        [Required(ErrorMessage = "El total es un campo obligatorio")]
         public double total { get; set; }
     
         public virtual articulo articulo { get; set; }
